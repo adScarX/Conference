@@ -1,0 +1,42 @@
+.account_page{
+    width: 100%;
+    position: relative;
+    height: 100vh;
+}
+.container_acc{
+    display: flex;
+    flex-direction: row;
+    height: 81vh;
+}
+
+.container_acc_r{
+    flex: 70%;
+}
+
+.container_acc_l{
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: aqua ;
+}
+
+.container_acc_l_logo{
+    flex: 50%;
+    display: flex;
+   
+}
+.container_acc_l_info{
+    flex: 50%;
+    background-color: bisque;
+}
+
+.container_conf{
+    justify-content: center;
+    border-color: black;
+    border-radius: 3%;
+    background-color: rgba(0, 78, 100, 0.04);
+    position: absolute;
+    width: 70%;
+height: 74%;
+
+}
