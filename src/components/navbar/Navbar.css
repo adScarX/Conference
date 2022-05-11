@@ -1,8 +1,8 @@
-.navbar{
+.navbar_1 {
     padding: 35px;
     left: 0%;
     height: 50px;
-    width: 100%;;
+    width: 100%;
     z-index: 9;
     margin-bottom: 7%;
     position: sticky;
@@ -11,40 +11,40 @@
 }
 
 
-.navbar_list{
+.navbar_list_1 {
     margin-top: 2%;
     cursor: pointer;
     display: flex;
     position: relative;
     list-style-type: none;
     overflow: hidden;
-    justify-content:center;
+    justify-content: center;
     width: 100%;
     text-align: center;
-    background-color: blue;
-}    
 
-.list_item{
+}
+
+.list_item_1 {
     position: relative;
     text-transform: capitalize;
     font-size: 20px;
     padding: 0 20px;
-    margin:0 5px ;
+    margin: 0 5px;
     text-decoration: none;
     opacity: 1;
-    color: white;
-    transition: 0.1s;  
-
-}
-
-.navbar_list :hover{
-    opacity: 0.8;
     color: black;
-    background-color: white;
-    border-radius: 3px;
-    border-style:none;
+    transition: 0.1s;
+
 }
 
-.link{
+.navbar_list_1 :hover {
+    opacity: 1;
+    color: white;
+    background-color: rgba(0, 78, 100, 0.92);
+    border-radius: 3px;
+    border-style: none;
+}
+
+.link {
     text-decoration: none;
 }

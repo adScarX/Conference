@@ -10,21 +10,21 @@ function Navbar (){
     let navigate_2=useNavigate();
 
     return(
-        <nav className="navbar">
-            <ul className="navbar_list">
+        <nav className="navbar_1">
+            <ul className="navbar_list_1">
             <Link to="/" className="link">
-            <li className="list_item">Home</li></Link>
+            <li className="list_item_1">Home</li></Link>
 
 
-            <li className="list_item" onClick={()=>{navigate_2("/My")}}>Conferences</li>
+            <li className="list_item_1" onClick={()=>{navigate_2("/MainConf")}}>Conferences</li>
 
 
            <Link to="/#footer" smooth className="link">
-           <li className="list_item">About us</li></Link>
+           <li className="list_item_1">About us</li></Link>
            <Link to="/#footer"  smooth className="link">
-           <li className="list_item" >Contact us</li> </Link>
+           <li className="list_item_1" >Contact us</li> </Link>
            
-           <li className="list_item" onClick={()=>{navigate("/account")}}>Account</li>
+           <li className="list_item_1" onClick={()=>{navigate("/account")}}>Account</li>
 
 
            
