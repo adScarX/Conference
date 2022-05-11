@@ -19,7 +19,7 @@ function Account () {
     
     axios.interceptors.request.use(
         config=>{
-            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyMjc0NTk2LCJpYXQiOjE2NTIyMzg1OTYsImp0aSI6IjE3Y2Y5ZGRjMDQyNzQ0NGI4ZGNjNGY5NDYyNTkxYWJmIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9._4ijv38txn8W_Yn0AfxPe-leAvpAQWdeaz4Zd7XOnII'
+            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyMzM0MTIyLCJpYXQiOjE2NTIyOTgxMjIsImp0aSI6IjZlZjk2Mjg4NzgwNzRmMmFiMTFiYjQ5MTRhZDc5OTEyIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.JqiiOl8hrx7VDiytxZVNwPhnuXj7dd3CqDXKrri-GFw'
             return config
         },
         error=>{
@@ -28,14 +28,15 @@ function Account () {
     )
 // for uploead image
     let formData = new FormData();
-    const [image,setimage]=useState([])
+    const [image,setimage]=useState({profile_picture:""})
 
     formData.append("profile_picture",image)
 
     
 
     useEffect(()=>{
-        axios.put('http://localhost:8000/users/profile',formData).then(res=>{
+        axios.put('http://localhost:8000/users/profile',{formData}).then(res=>{
+            setimage(res.profile_picture)
         console.log(res)
     })
     .catch((err)=>
@@ -87,9 +88,8 @@ function Account () {
                     <div className="container_acc_l_logo">
                         <div className="image_account">
                         
-                        <input type="file" accept="file"  id="input" 
-                        onChange={()=>setimage()}
-                            
+                        <input type="file" accept="file"  id="input"  v
+                        onChange={(e)=>{setimage(e.target.value)}}
                         />
                         </div>
                     </div>
