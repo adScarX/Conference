@@ -24,13 +24,7 @@
     
 }    
 
-<<<<<<< HEAD
-
-
-.list_item_1 {
-=======
 .list_item{
->>>>>>> eadc17464a6aaad7297d3ff1820719df00f26859
     position: relative;
     text-transform: capitalize;
     font-size: 20px;
