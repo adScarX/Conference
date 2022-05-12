@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function MainConf() {
+  let navigate_2=useNavigate();
   let navigate = useNavigate();
   const [confs, setConfs] = useState(data);
   useEffect(() => {
@@ -18,7 +19,23 @@ function MainConf() {
   }, []);
   return (
     <>
-      <Navbar />
+      <nav className="navbar_1">
+            <ul className="navbar_list_1">
+            <Link to="/" className="link">
+            <li className="list_item_1">Home</li></Link>
+
+
+            <li className="list_item_1" onClick={()=>{navigate_2("/MainConf")}}>Conferences</li>
+
+
+           <Link to="/#footer" smooth className="link">
+           <li className="list_item_1">About us</li></Link>
+           <Link to="/#footer"  smooth className="link">
+           <li className="list_item_1" >Contact us</li> </Link>
+           
+           <li className="list_item_1" onClick={()=>{navigate("/account")}}>Account</li>
+            </ul>
+        </nav>
       <div className="dv">
         <button className="btn" onClick={()=>navigate("/CreateCOnf")}>
           {" "}
