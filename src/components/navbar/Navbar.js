@@ -17,7 +17,7 @@ function Navbar (){
             <li className="list_item">Home</li></Link>
 
 
-            <li className="list_item" onClick={()=>{navigate_2("/My")}}>Conferences</li>
+            <li className="list_item" onClick={()=>{navigate_2("/MainConf")}}>Conferences</li>
 
 
            <Link to="/#footer" smooth className="link">

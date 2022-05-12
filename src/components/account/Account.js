@@ -11,8 +11,6 @@ import {HashLink as Link }
 from "react-router-hash-link";
 
 
-
-
 function Account () {
     let navigate = useNavigate();
     let navigate_2=useNavigate();
@@ -26,30 +24,50 @@ function Account () {
             return Promise.reject(error);
         }
     )
-// for uploead image
-    let formData = new FormData();
-    const [image,setimage]=useState({profile_picture:""})
+// for upload image
+    
+const [image,setimage]=useState('')
+const [loading,setloading]=useState(false)
+    const uploadImage=({target:{files}})=>{
+         
 
-    formData.append("profile_picture",image)
-
+        
+            console.log(files)
+            console
+            .log('here')
+            setimage(files[0])
+        
+        
+        
+            console
+            .log('here2')
+            const data_2 = new FormData()
+            data_2.append('profile_picture',image)
+            axios.put('http://127.0.0.1:8000/users/profile',
+            data_2
+        )
+        .then(res=>{
+            console.log(res)
+        })
+        
     
 
-    useEffect(()=>{
-        axios.put('http://localhost:8000/users/profile',{formData}).then(res=>{
-            setimage(res.profile_picture)
-        console.log(res)
-    })
-    .catch((err)=>
-    console.log(err)
-    )});
 
+    //     axios.put('http://127.0.0.1:8000/users/profile',
+    //     data_2
+    //     )
+    //     .then(res=>
+    //         {
+    //     setimage(target),
+    //     setloading(false)
+    // })
+}
 
+  
+    
 
 
     const [data,setData]=useState([])
-
-
-
     useEffect(()=>{
         axios.get('http://127.0.0.1:8000/users/profile').then(response=>{
         console.log(response)
@@ -68,7 +86,7 @@ function Account () {
             <li className="list_item_1">Home</li></Link>
 
 
-            <li className="list_item_1" onClick={()=>{navigate_2("/My")}}>Conferences</li>
+            <li className="list_item_1" onClick={()=>{navigate_2("/MainConf")}}>Conferences</li>
 
 
            <Link to="/#footer" smooth className="link">
@@ -88,8 +106,10 @@ function Account () {
                     <div className="container_acc_l_logo">
                         <div className="image_account">
                         
-                        <input type="file" accept="file"  id="input"  v
-                        onChange={(e)=>{setimage(e.target.value)}}
+                        <input 
+                        type="file" 
+                        accept="file"
+                        onChange={uploadImage}
                         />
                         </div>
                     </div>
