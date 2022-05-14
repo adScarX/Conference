@@ -29,6 +29,7 @@
 }
 
 .inp{
+        padding-left: 15px;
         border: none;
         /* margin: 30px; */
         display: block;

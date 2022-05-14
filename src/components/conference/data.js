@@ -61,6 +61,22 @@ export const conferences = [
  },
 ];
 
+export const confreviewers = [
+    {
+    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
+    first_name: "hfdubrd",
+    family_name: "string",
+    email: "user@example.com",
+    phone_number: "string",
+    full_adress: "string",
+    linked_in_username: "string",
+    fields_of_interssts: "string",
+    bio: "this is bio",
+    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+    is_admin: false
+  },
+]
+
 export const users = [
   {
     id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
@@ -76,7 +92,7 @@ export const users = [
     is_admin: false
   },
   {
-    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
+    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a5",
     first_name: "hfdubrd",
     family_name: "string",
     email: "user@example.com",
@@ -89,7 +105,7 @@ export const users = [
     is_admin: false
   },
   {
-    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
+    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a6",
     first_name: "hfdubrd",
     family_name: "string",
     email: "user@example.com",
@@ -102,7 +118,7 @@ export const users = [
     is_admin: false
   },
   {
-    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
+    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a7",
     first_name: "hfdubrd",
     family_name: "string",
     email: "user@example.com",
@@ -115,7 +131,7 @@ export const users = [
     is_admin: false
   },
   {
-    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
+    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a8",
     first_name: "hfdubrd",
     family_name: "string",
     email: "user@example.com",
@@ -128,7 +144,7 @@ export const users = [
     is_admin: false
   },
   {
-    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
+    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a9",
     first_name: "hfdubrd",
     family_name: "string",
     email: "user@example.com",
