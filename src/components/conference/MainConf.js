@@ -4,7 +4,7 @@ import "./MainConf.css";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import SearchIcon from "@mui/icons-material/Search";
-import { data } from "./data";
+import {conferences} from "./data";
 import {HashLink as Link } from "react-router-hash-link";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 function MainConf() {
   let navigate_2=useNavigate();
   let navigate = useNavigate();
-  const [confs, setConfs] = useState(data);
+  const [confs, setConfs] = useState(conferences);
   useEffect(() => {
     console.log("test");
   }, []);
