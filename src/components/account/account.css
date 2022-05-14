@@ -166,39 +166,3 @@ h1{
 
 
 
-.image_upload_preview{
-    width: 12rem;
-    height: 12rem;
-    border: 1px solid #222;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 1rem;
-    clip-path: circle(50% at 50% 50%);
-}
-
-.image_upload_preview img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.image-upload-button{
-    color: #ffff;
-    background-color: #222;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-}
-
-.image-upload-button:hover{
-    background-color: transparent;
-    color: #ffff;
-}
-
-.form-controll{
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
