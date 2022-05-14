@@ -9,7 +9,7 @@ import { useNavigate }
 from "react-router-dom";
 import {HashLink as Link } 
 from "react-router-hash-link";
-import {data} from "./../conference/data"
+import {conferences} from "./../conference/data"
 import "./../conference/MainConf.css"
 import image_1 from "./ profile.png"
 
@@ -127,7 +127,7 @@ function Account () {
 //     // },[]);
 
 
-    const [confs, setConfs] = useState(data);
+    const [confs, setConfs] = useState(conferences);
   useEffect(() => {
     console.log("test");
   }, []);
@@ -201,7 +201,7 @@ function Account () {
 {/* //////////////////////////////////////////////////// */}
 
                     <div className="container_acc_l_info">
-                        {data.data?.map((prfl)=>
+                        {conferences.data?.map((prfl)=>
                         <div>
                             <h1>{prfl.first_name}</h1>
 
