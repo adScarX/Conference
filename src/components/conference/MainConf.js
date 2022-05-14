@@ -44,7 +44,7 @@ function MainConf() {
         <button className="search   ">
           <SearchIcon fontSize="large"></SearchIcon>
         </button>
-        <input type="text" className="inp" placeholder="   Search">
+        <input type="text" className="inp" placeholder="Search">
         </input>
         <button className="filter">
           <FilterListIcon fontSize="large"></FilterListIcon>
@@ -53,9 +53,10 @@ function MainConf() {
       </div>
       <div className="originalConf">
           {confs.map((conf) => {
+            const{id} = conf;
             return (
-              <>
-        <div className="confDiv">
+              
+        <div className="confDiv" key={id}>
               <div className="test">
                   <div className="title">{conf.title}</div>
 
@@ -71,7 +72,7 @@ function MainConf() {
                 <img className="image" src={conf.photo} alt={conf.photo} />
       </div>
 
-              </>
+              
             );
           })}
         </div>

@@ -9,9 +9,12 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import {conferences} from "./data.js"
 import {users} from "./data.js"
+import {confreviewers} from "./data.js"
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import SearchIcon from "@mui/icons-material/Search";
+
 
 import { format, parseISO } from 'date-fns';
 
@@ -23,45 +26,40 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 function CreateConf(){
-  const[open , setOpen]=useState(false);
+
+  const removeItem = (id) => {
+    let candidate = candidates.filter((x)=> x.id ==id);
+    let newUsers = candidates.filter((y) => y.id !== id);
+    setCandidates(newUsers);
+    reviewers.push(candidate[0])
+    // setReviewers(confreviewers,candidate[0])
+    // reviewers.push(candidate)
+  };
+  const removeReviewer = (id) => {
+    let candidate = reviewers.filter((x)=> x.id ==id);
+    let newUsers = reviewers.filter((y) => y.id !== id);
+    setReviewers(newUsers);
+    candidates.push(candidate[0])
+    // setReviewers(confreviewers,candidate[0])
+    // reviewers.push(candidate)
+  };
+  // const[open , setOpen]=useState(false);
+
+  // const[add,setAdd] = useState(true)
+
+
+
   const switche =()=>{
-    setOpen(!open)
+    setShowReview(! showReview)
   }
-  const [confs, setConfs] = useState(conferences);
-  const reviewer = {
-    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
-    first_name: "hfdubrd",
-    family_name: "string",
-    email: "user@example.com",
-    phone_number: "string",
-    full_adress: "string",
-    linked_in_username: "string",
-    fields_of_interssts: "string",
-    bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
-    is_admin: false
-  }
+  // const [confs, setConfs] = useState(conferences);
+
+  const[showReview,  setShowReview] = useState(true);
+  const[candidates, setCandidates] = useState(users);
   const[reviewers, setReviewers] = useState(
-    [
-      {
-    id: "605f7435-6edf-4d2c-a141-6192e7c1f0a4",
-    first_name: "hfdubrd",
-    family_name: "string",
-    email: "user@example.com",
-    phone_number: "string",
-    full_adress: "string",
-    linked_in_username: "string",
-    fields_of_interssts: "string",
-    bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
-    is_admin: false
-  }
-    ]
-  // users
-    
-
-
-  )
+    // confreviewers
+    []
+    )
 
   let navigate = useNavigate();
     let navigate_2=useNavigate();
@@ -139,9 +137,8 @@ function CreateConf(){
         </div>
         <div className="inp3">
           <DatePicker
-          showFullMonthYearPicker="true"
-             className="dates" placeholderText="Submition start date"
-         selected={startDate}
+          className="dates" placeholderText="Submition start date"
+          selected={startDate}
           onChange={handleDate}/>
         <DatePicker 
          allowSameDay="false"  className="dates" placeholderText="Submition deadline"
@@ -161,11 +158,55 @@ function CreateConf(){
         </input>
 
         <div className="originalReviewer">
+          { ! showReview &&
+           <div className="searchReviewer">
+            <button className="search">
+          <SearchIcon fontSize="large"></SearchIcon>
+        </button>
+            <input type="text" className="searchBar" placeholder="Search for reviewers">
+        </input>
+          </div>
+            }
           
-          {reviewers.map((reviewer) => {
+          {
+              ! showReview &&
+          candidates.map((user) => {
+            const {id} = user;
             return (
-              <>
-        <div className="userDiv">
+              
+              
+        <div className="userDiv" key={id}>
+              <div className="test">
+                  <div className="title">{user.first_name}</div>
+
+                <div className="host">
+                   Hosted by {user.id}, Location - {user.linked_in_username} to {user.id}
+                   </div>
+
+                <div className="category"> Category: {user.family_name}</div>
+
+                <div className="addremove">
+                  <button className="btn2"
+                   onClick={()=>removeItem(id)}
+                  > <p>Add</p> </button>
+                </div>
+
+              </div>
+              
+                <img className="image" src={user.profile_picture} alt={user.profile_picture} />
+      </div>
+
+              
+            );
+          })}
+
+          {
+               showReview &&
+          reviewers.map((reviewer) => {
+            const {id} = reviewer;
+            return (
+              
+        <div className="userDiv" key={id}>
               <div className="test">
                   <div className="title">{reviewer.first_name}</div>
 
@@ -175,27 +216,42 @@ function CreateConf(){
 
                 <div className="category"> Category: {reviewer.family_name}</div>
 
-              </div>
+                {/* <div className="addremove"> */}
+                  <button className="removebtn"
+                   onClick={()=>removeReviewer(id)}
+                  ><p>Remove</p>  </button>
+                {/* </div> */}
                 
 
+              </div>
+              
                 <img className="image" src={reviewer.profile_picture} alt={reviewer.profile_picture} />
       </div>
 
-              </>
+              
             );
           })}
+
+          
+          { showReview &&
           <button className="add" onClick={switche} >
             <AddOutlinedIcon fontSize="large" />
-          </button>
+          </button>}
+
+        {! showReview && <button className="btn" onClick={switche} ><p>DONE</p></button>}
+
+          
         </div>
+
+
       <button className="btn" ><p className="txt">Create Conference</p></button>
       
       </div>
 
 
-<Popup trigger={open}>
+{/* <Popup trigger={open}>
               <h3>Test test</h3>
-            </Popup>
+            </Popup> */}
         </main>
     )
 }
