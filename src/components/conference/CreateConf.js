@@ -83,6 +83,7 @@ function CreateConf(){
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
+    
 
   };
     const [startDate, setStartDate] = useState();
@@ -150,6 +151,9 @@ function CreateConf(){
         <input type="text" className="inp2" placeholder="Conference location"/>
 
         <input type="text" className="inp2" placeholder="Conference site"/>
+
+
+
         <button className="inp2" onClick={handleClick} >
             <p className="upload">Conference logo (image) <span></span> {<CloudUploadOutlinedIcon fontSize="large"/>}</p> 
         </button>

@@ -9,7 +9,7 @@ import { useNavigate }
 from "react-router-dom";
 import {HashLink as Link } 
 from "react-router-hash-link";
-import {data} from "./../conference/data"
+import {data_1} from "./data"
 import "./../conference/MainConf.css"
 import image_1 from "./ profile.png"
 
@@ -19,7 +19,7 @@ function Account () {
     
     axios.interceptors.request.use(
         config=>{
-            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyMzg5ODQ1LCJpYXQiOjE2NTIzNTM4NDUsImp0aSI6IjUzNzRmOGI5YTQ4MTRmYzM4Y2M2Y2E0YzY2MmI3Y2ZjIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.b3Bdrrkb2YrFKJaG2uJLZGORuyiomYu0tYrZvADylkA'
+            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNTczMTE0LCJpYXQiOjE2NTI1MzcxMTQsImp0aSI6IjYxYmJkNDUwNmIwZTRkNmJhYjgzZGM5NzBlZWVkNzBhIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.1uPdvMKVP-1X9z_ZHHYsyJr1qSq9TruvriN6gb4Fw20'
             return config
         },
         error=>{
@@ -27,35 +27,32 @@ function Account () {
         }
     )
 
-    const [file,setfile]=useState();
-    const [previewurl,setpreviewurl]=useState();
-    const filepickerref=useRef();
+    
 
-    function pickerhandler(event){
-        let pickedfile;
-        if(event.target.files && event.target.files.length===1){
-            pickedfile=event.target.files[0];
-            setfile(pickedfile);
-        }
-    }
-
-    function pickedimagehandler(){
-        filepickerref.current.click();
-    }
-
-    useEffect(()=>{
-        if(file){
-            return;
-        }
-        const filereder=new filereder();
-        filereder.onlead=()=>{
-        setpreviewurl(filereder.result);
-    };
-    filereder.readAsDataUrl()
-    }
-    )
+    // const upurl=(e)=>{
+    //     console.log(e.target.files[0])}
 
 
+    // let formadata =  new FormData();    
+
+    // const [image,setimage]=useState('')    
+    // const upimage=(e)=>{
+    //     console.log(e.target.files[0])
+    //     if(e.target && e.target.files[0]){
+    //         formadata.append('profile_picture',e.target.files[0])
+    //     }
+    // }
+
+    // const updata=()=>
+    // {
+    //     axios.put(
+    //         'http://127.0.0.1:8000/users/profile',{formadata}
+    //     ).then(res=>{
+    //         console.log('res')
+    //     }).catch(error=>{
+    //         console.log('error')
+    // }
+    //     )}
     
 
 
@@ -75,63 +72,39 @@ function Account () {
 
 
 // for upload image
-    
-// const [image,setimage]=useState('')
-// const [loading,setloading]=useState(false)
-//     const uploadImage=({target:{files}})=>{
-         
-
-        
-//             console.log(files)
-//             console
-//             .log('here')
-//             setimage(files[0])
-        
-        
-        
-//             console
-//             .log('here2')
-//             const data_2 = new FormData()
-//             data_2.append('profile_picture',image)
-//             axios.put('http://127.0.0.1:8000/users/profile',
-//             data_2
-//         )
-//         .then(res=>{
-//             console.log(res)
-//         })
-        
-    
+    const uploadImage=({target:{files}})=>{
+            const data = new FormData()
+            data.append('profile_picture',files[0])
+            axios.put('http://127.0.0.1:8000/users/profile',
+            data
+        )
+        .then(res=>{
+            console.log('here_pic')
+        })
+    }
+    const [data_profile,setdata_profile]=useState([])
+    const [image,setimage]=useState([])
 
 
-//     //     axios.put('http://127.0.0.1:8000/users/profile',
-//     //     data_2
-//     //     )
-//     //     .then(res=>
-//     //         {
-//     //     setimage(target),
-//     //     setloading(false)
-//     // })
-// }
-
-  
+        useEffect(()=>
+        {
+            axios.get(
+                'http://127.0.0.1:8000/users/profile'
+            ).then(reponse=>
+                {
+                    console.log(reponse['data']);
+                    setdata_profile(reponse['data']);
+                }).catch(err=>{
+                    console.log('here2');
+                })
+        },[])
     
 
 
-//     // const [data,setData]=useState([])
-//     // useEffect(()=>{
-//     //     axios.get('http://127.0.0.1:8000/users/profile').then(response=>{
-//     //     console.log(response)
-//     //     setData(response['data'])})
-//     //     .catch((err)=>
-//     //     console.log(err))
-//     // },[]);
-
-
-    const [confs, setConfs] = useState(data);
+    const [confs, setConfs] = useState(data_1);
   useEffect(() => {
     console.log("test");
   }, []);
-    
 
     
     return(
@@ -164,49 +137,26 @@ function Account () {
 
 {/*  ////////////////////////////// */}
 
-                    {/* <div className="container_acc_l_logo">
+                    <div className="container_acc_l_logo">
                         <div className="form-controll">
-                            <input ref={filepickerref}
-                            style={{display:"none"}}
+                            <input 
                             type="file"
                             accept=".png"
-                            onChange={pickerhandler}
+                            onChange={uploadImage}
+                            name='file_up'
                             />
-                            <div className="image_upload_preview">
-                                {previewurl && <img src={previewurl} alt="previwer"/>}
-                                {!previewurl &&(
-                                    <div className="center">
-                                        <button className="image-upload-image"  type="button" onClick={pickedimagehandler}>+</button></div>
-                                ) }
-                            </div>
-
-                            {previewurl &&(
-                                 <div className="center">
-                                 <button className="image-upload-image"  type="button" onClick={pickedimagehandler}>
-                                     <MdModeEdit className="icon"></MdModeEdit>
-                                     </button>
-                                      </div>
-                            )}
-
-
-
-
-
                         </div>
+                        
+                    </div>
 
-                    </div> */}
+                    
+
 
 
 
 {/* //////////////////////////////////////////////////// */}
 
                     <div className="container_acc_l_info">
-                        {data.data?.map((prfl)=>
-                        <div>
-                            <h1>{prfl.first_name}</h1>
-
-                        </div>
-                        )}
                     </div>
                 </div>
 
