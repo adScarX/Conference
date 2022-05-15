@@ -1,4 +1,3 @@
-import Navbar from "../navbar/Navbar";
 import React, { useEffect, useState } from "react";
 import "./MainConf.css";
 import FilterListIcon from "@mui/icons-material/FilterList";
