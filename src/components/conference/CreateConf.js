@@ -51,8 +51,8 @@ function CreateConf(){
     let newUsers = reviewers.filter((y) => y.id !== id);
     setReviewers(newUsers);
     candidates.push(candidate[0])
-    // setReviewers(confreviewers,candidate[0])
-    // reviewers.push(candidate)
+    reviewerNumber -- 
+    reviewerIds.pop(candidate[0].id)
   };
 
   let test='';
@@ -187,7 +187,14 @@ function CreateConf(){
             <input type="text" value={test} className="searchBar" placeholder="Search for reviewers" onChange={console.log(test)}>
         </input>
           </div>
+          
             }
+            {
+        error &&
+        <div className="error">
+        <p>You cannot choose more than 3 reviewers</p>
+      </div>
+      }
           
           {
               ! showReview &&
@@ -264,12 +271,7 @@ function CreateConf(){
           
         </div>
 
-      {
-        error &&
-        <div className="error">
-        <p>You cannot choose more than 3 reviewers</p>
-      </div>
-      }
+      
       <button className="btn" ><p className="txt">Create Conference</p></button>
       
       </div>
