@@ -9,16 +9,7 @@ import { useNavigate }
 from "react-router-dom";
 import {HashLink as Link } 
 from "react-router-hash-link";
-<<<<<<< HEAD
-import {data_1} 
-from "./data"
-=======
-<<<<<<< HEAD
-import {conferences} from "./../conference/data"
-=======
 import {data_1} from "./data"
->>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
->>>>>>> 7acb18d1a01752329f04fb01ad3133148bdd6209
 import "./../conference/MainConf.css"
 import image_1 
 from "./../../img/email.png"
@@ -33,27 +24,43 @@ function Account () {
     
     axios.interceptors.request.use(
         config=>{
-            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNjEwMTc5LCJpYXQiOjE2NTI1NzQxNzksImp0aSI6ImJmMGU0ZWRmMjAxOTQ4OWViZGY1NGQ0NTA2M2U4Y2UwIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.xwb2QCz0vXWnUQD78m_suzlHl0lPnk55q9DiGuufjNA'
+            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNzUzMTQ4LCJpYXQiOjE2NTI3MTcxNDgsImp0aSI6ImI1YmU3NmYzYjVjZjQ5Y2Y4NDE0ZTgwMDdhNDNiMzdiIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.iTOG5riMizMF002rrdlUu9R9A3-j0NQh4Rgw_S33apY'
             return config
         },
         error=>{
             return Promise.reject(error);
         }
     )
-    let host="http://127.0.0.1:8000"
-    
 
+
+  
 // for upload image
-    const uploadImage=({target:{files}})=>{
+    let host="http://127.0.0.1:8000"
+    const [pic,setpic]=useState('')
+    const [isloading,setisloading]=useState(false)
+    let path=""
+
+    
+    const uploadImage=({target:files})=>{
             const data = new FormData()
             data.append('profile_picture',files[0])
+            console.log()
+            path=files.path
             axios.put('http://127.0.0.1:8000/users/profile',
             data
         )
         .then(res=>{
+            setpic(files[0].path)
+            setdata_profile(res.data)
+            setisloading(!isloading)
             console.log('here_pic')
         })
+    
     }
+
+    
+
+
     const [data_profile,setdata_profile]=useState({})
 
 
@@ -64,46 +71,16 @@ function Account () {
             ).then(reponse=>
                 {
                     console.log(reponse.data);
-                    setdata_profile(reponse.data);
+                    setdata_profile(reponse["data"]);
+                    setpic(host+reponse.data["profile_picture"]);
                 }).catch(err=>{
-                    console.log('here2');
+                    console.log(err);
                 })
-        },[])
+        },[isloading])
     
 
 
-<<<<<<< HEAD
-//     //     axios.put('http://127.0.0.1:8000/users/profile',
-//     //     data_2
-//     //     )
-//     //     .then(res=>
-//     //         {
-//     //     setimage(target),
-//     //     setloading(false)
-//     // })
-// }
-
-  
-    
-
-
-//     // const [data,setData]=useState([])
-//     // useEffect(()=>{
-//     //     axios.get('http://127.0.0.1:8000/users/profile').then(response=>{
-//     //     console.log(response)
-//     //     setData(response['data'])})
-//     //     .catch((err)=>
-//     //     console.log(err))
-//     // },[]);
-
-
-    const [confs, setConfs] = useState(conferences);
-=======
     const [confs, setConfs] = useState(data_1);
->>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
-  useEffect(() => {
-    console.log("test");
-  }, []);
 
     
     return(
@@ -145,7 +122,7 @@ function Account () {
                             name='file_up'
                             />
                         </div>
-                        <img src={host+data_profile.profile_picture} alt={data_profile.profile_picture}/>
+                        {!isloading&&<img src={pic} alt={pic}/>}
                         
                     </div>
 
@@ -157,7 +134,6 @@ function Account () {
 {/* //////////////////////////////////////////////////// */}
 
                     <div className="container_acc_l_info">
-<<<<<<< HEAD
                         <div className="profile_info_sta">
                        <h1>{data_profile.family_name}  {data_profile.first_name}</h1>
                        <h6>{data_profile.bio}</h6>
@@ -197,17 +173,12 @@ function Account () {
                            </div>
                        </div>
 
-=======
-<<<<<<< HEAD
-                        {conferences.data?.map((prfl)=>
+                        {data_1.data_1?.map((prfl)=>
                         <div>
                             <h1>{prfl.first_name}</h1>
 
                         </div>
                         )}
-=======
->>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
->>>>>>> 7acb18d1a01752329f04fb01ad3133148bdd6209
                     </div>
                 </div>
 
