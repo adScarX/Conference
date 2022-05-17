@@ -24,14 +24,25 @@ import Popup from "./Popup.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+ let reviewerNumber = 0;
+ let reviewerIds=[]
 
 function CreateConf(){
-
+  
   const removeItem = (id) => {
-    let candidate = candidates.filter((x)=> x.id ==id);
+    if(reviewerNumber < 3){
+      console.log('here')
+      let candidate = candidates.filter((x)=> x.id ==id);
     let newUsers = candidates.filter((y) => y.id !== id);
     setCandidates(newUsers);
-    reviewers.push(candidate[0])
+    reviewers.push(candidate[0]);
+    reviewerIds.push(candidate[0].id)
+    reviewerNumber++;
+    console.log(reviewerNumber)
+    }else{
+      setError(true)
+    }
+    
     // setReviewers(confreviewers,candidate[0])
     // reviewers.push(candidate)
   };
@@ -43,6 +54,13 @@ function CreateConf(){
     // setReviewers(confreviewers,candidate[0])
     // reviewers.push(candidate)
   };
+
+  let test='';
+
+  const search = (name)=>{
+    let searchedList = candidates.filter((candidate)=>candidate.name == candidate.name.search(name))
+    setCandidates(searchedList)
+  }
   // const[open , setOpen]=useState(false);
 
   // const[add,setAdd] = useState(true)
@@ -51,11 +69,14 @@ function CreateConf(){
 
   const switche =()=>{
     setShowReview(! showReview)
+    setError(false)
   }
   // const [confs, setConfs] = useState(conferences);
 
   const[showReview,  setShowReview] = useState(true);
   const[candidates, setCandidates] = useState(users);
+  const [error,setError] = useState(false)
+ 
   const[reviewers, setReviewers] = useState(
     // confreviewers
     []
@@ -163,7 +184,7 @@ function CreateConf(){
             <button className="search">
           <SearchIcon fontSize="large"></SearchIcon>
         </button>
-            <input type="text" className="searchBar" placeholder="Search for reviewers">
+            <input type="text" value={test} className="searchBar" placeholder="Search for reviewers" onChange={console.log(test)}>
         </input>
           </div>
             }
@@ -238,12 +259,17 @@ function CreateConf(){
             <AddOutlinedIcon fontSize="large" />
           </button>}
 
-        {! showReview && <button className="btn" onClick={switche} ><p>DONE</p></button>}
+        {! showReview && <button className="btn3" onClick={switche} ><p>DONE</p></button>}
 
           
         </div>
 
-
+      {
+        error &&
+        <div className="error">
+        <p>You cannot choose more than 3 reviewers</p>
+      </div>
+      }
       <button className="btn" ><p className="txt">Create Conference</p></button>
       
       </div>

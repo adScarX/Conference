@@ -9,7 +9,9 @@ import { useNavigate }
 from "react-router-dom";
 import {HashLink as Link } 
 from "react-router-hash-link";
-import {data_1} from "./data"
+import {data_1} 
+from "./data"
+import {conferences} from "./../conference/data"
 import "./../conference/MainConf.css"
 import image_1 
 from "./../../img/email.png"
@@ -134,6 +136,7 @@ function Account () {
 {/* //////////////////////////////////////////////////// */}
 
                     <div className="container_acc_l_info">
+
                         <div className="profile_info_sta">
                        <h1>{data_profile.family_name}  {data_profile.first_name}</h1>
                        <h6>{data_profile.bio}</h6>
@@ -179,6 +182,7 @@ function Account () {
 
                         </div>
                         )}
+
                     </div>
                 </div>
 
