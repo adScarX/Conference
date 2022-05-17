@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useRef} 
+import React,{useEffect,useState} 
 from "react";
 import "./account.css";
 import Nav 
@@ -9,9 +9,27 @@ import { useNavigate }
 from "react-router-dom";
 import {HashLink as Link } 
 from "react-router-hash-link";
+<<<<<<< HEAD
 import {data_1} from "./data"
+=======
+<<<<<<< HEAD
+import {data_1} 
+from "./data"
+=======
+<<<<<<< HEAD
+import {conferences} from "./../conference/data"
+=======
+import {data_1} from "./data"
+>>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
+>>>>>>> 7acb18d1a01752329f04fb01ad3133148bdd6209
+>>>>>>> df1e668f9c4f130548f22205ff9c4f82d65a5dec
 import "./../conference/MainConf.css"
-import image_1 from "./ profile.png"
+import image_1 
+from "./../../img/email.png"
+import image_phone from 
+"./../../img/phone-call.png"
+import image_linkdin 
+from "./../../img/linkedin.png"
 
 function Account () {
     let navigate = useNavigate();
@@ -19,57 +37,15 @@ function Account () {
     
     axios.interceptors.request.use(
         config=>{
-            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNTczMTE0LCJpYXQiOjE2NTI1MzcxMTQsImp0aSI6IjYxYmJkNDUwNmIwZTRkNmJhYjgzZGM5NzBlZWVkNzBhIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.1uPdvMKVP-1X9z_ZHHYsyJr1qSq9TruvriN6gb4Fw20'
+            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNjEwMTc5LCJpYXQiOjE2NTI1NzQxNzksImp0aSI6ImJmMGU0ZWRmMjAxOTQ4OWViZGY1NGQ0NTA2M2U4Y2UwIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.xwb2QCz0vXWnUQD78m_suzlHl0lPnk55q9DiGuufjNA'
             return config
         },
         error=>{
             return Promise.reject(error);
         }
     )
-
+    let host="http://127.0.0.1:8000"
     
-
-    // const upurl=(e)=>{
-    //     console.log(e.target.files[0])}
-
-
-    // let formadata =  new FormData();    
-
-    // const [image,setimage]=useState('')    
-    // const upimage=(e)=>{
-    //     console.log(e.target.files[0])
-    //     if(e.target && e.target.files[0]){
-    //         formadata.append('profile_picture',e.target.files[0])
-    //     }
-    // }
-
-    // const updata=()=>
-    // {
-    //     axios.put(
-    //         'http://127.0.0.1:8000/users/profile',{formadata}
-    //     ).then(res=>{
-    //         console.log('res')
-    //     }).catch(error=>{
-    //         console.log('error')
-    // }
-    //     )}
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // for upload image
     const uploadImage=({target:{files}})=>{
@@ -82,8 +58,7 @@ function Account () {
             console.log('here_pic')
         })
     }
-    const [data_profile,setdata_profile]=useState([])
-    const [image,setimage]=useState([])
+    const [data_profile,setdata_profile]=useState({})
 
 
         useEffect(()=>
@@ -92,8 +67,8 @@ function Account () {
                 'http://127.0.0.1:8000/users/profile'
             ).then(reponse=>
                 {
-                    console.log(reponse['data']);
-                    setdata_profile(reponse['data']);
+                    console.log(reponse.data);
+                    setdata_profile(reponse.data);
                 }).catch(err=>{
                     console.log('here2');
                 })
@@ -146,6 +121,7 @@ function Account () {
                             name='file_up'
                             />
                         </div>
+                        <img src={host+data_profile.profile_picture} alt={data_profile.profile_picture}/>
                         
                     </div>
 
@@ -157,6 +133,60 @@ function Account () {
 {/* //////////////////////////////////////////////////// */}
 
                     <div className="container_acc_l_info">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                        <div className="profile_info_sta">
+                       <h1>{data_profile.family_name}  {data_profile.first_name}</h1>
+                       <h6>{data_profile.bio}</h6>
+                       </div>
+                       <div className="profile_info_det">
+                           <div className="profile_info_det_div">
+                               <div className="profile_info_det_div1">
+                                   <img src={image_1} alt={image_1}/>
+                               </div>
+                               <div className="profile_info_det_div2">
+                               <h3>{data_profile.family_name}</h3>
+                               </div>
+                           </div>
+                           <div className="profile_info_det_div">
+                               <div className="profile_info_det_div1">
+                                   <img src={image_phone} alt={image_phone}/>
+                               </div>
+                               <div className="profile_info_det_div2">
+                               <h3>{data_profile.phone_number}</h3>
+                               </div>
+                           </div>
+                           <div className="profile_info_det_div">
+                               <div className="profile_info_det_div1">
+                                   <img src={image_linkdin} alt={image_linkdin}/>
+                               </div>
+                               <div className="profile_info_det_div2">
+                               <h3>{data_profile.linked_in_username}</h3>
+                               </div>
+                           </div>
+                           <div className="profile_info_det_div">
+                               <div className="profile_info_det_div1">
+                                   <img src={image_1} alt={image_1}/>
+                               </div>
+                               <div className="profile_info_det_div2">
+                               <h2>{data_profile.family_name}</h2>
+                               </div>
+                           </div>
+                       </div>
+
+=======
+<<<<<<< HEAD
+                        {conferences.data?.map((prfl)=>
+                        <div>
+                            <h1>{prfl.first_name}</h1>
+
+                        </div>
+                        )}
+=======
+>>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
+>>>>>>> 7acb18d1a01752329f04fb01ad3133148bdd6209
+>>>>>>> df1e668f9c4f130548f22205ff9c4f82d65a5dec
                     </div>
                 </div>
 

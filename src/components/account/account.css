@@ -22,7 +22,8 @@
 
 .container_acc_l_info{
     flex: 70%;
-    background-color: bisque;
+    display: flex;
+    flex-direction: column;
 }
 
 .container_conf{
@@ -96,7 +97,6 @@ h1{
 
 .container_acc_l_logo{
     flex: 30%;
-    display: flex;
     justify-content: center;
     
 }
@@ -165,4 +165,37 @@ h1{
 
 
 
+
+.profile_info_sta{
+    flex: 30%;
+    justify-content: center;
+    text-align: center;
+}
+
+.profile_info_det{
+    margin-top: 5%;
+    flex:70%;
+    justify-content: center;
+}
+.profile_info_det_div{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+    margin-left: 20%;
+
+}
+.profile_info_det_div1{
+    flex: 10%;
+    justify-content: center;
+}
+.profile_info_det_div1 img{
+    width: 100%;
+    height: 65%;
+
+}
+.profile_info_det_div2{
+    flex: 90%;
+    margin-left: 5%;
+}
 
