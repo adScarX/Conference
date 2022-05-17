@@ -9,11 +9,7 @@ import { useNavigate }
 from "react-router-dom";
 import {HashLink as Link } 
 from "react-router-hash-link";
-<<<<<<< HEAD
-import {conferences} from "./../conference/data"
-=======
 import {data_1} from "./data"
->>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
 import "./../conference/MainConf.css"
 import image_1 from "./ profile.png"
 
@@ -105,35 +101,7 @@ function Account () {
     
 
 
-<<<<<<< HEAD
-//     //     axios.put('http://127.0.0.1:8000/users/profile',
-//     //     data_2
-//     //     )
-//     //     .then(res=>
-//     //         {
-//     //     setimage(target),
-//     //     setloading(false)
-//     // })
-// }
-
-  
-    
-
-
-//     // const [data,setData]=useState([])
-//     // useEffect(()=>{
-//     //     axios.get('http://127.0.0.1:8000/users/profile').then(response=>{
-//     //     console.log(response)
-//     //     setData(response['data'])})
-//     //     .catch((err)=>
-//     //     console.log(err))
-//     // },[]);
-
-
-    const [confs, setConfs] = useState(conferences);
-=======
     const [confs, setConfs] = useState(data_1);
->>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
   useEffect(() => {
     console.log("test");
   }, []);
@@ -189,15 +157,6 @@ function Account () {
 {/* //////////////////////////////////////////////////// */}
 
                     <div className="container_acc_l_info">
-<<<<<<< HEAD
-                        {conferences.data?.map((prfl)=>
-                        <div>
-                            <h1>{prfl.first_name}</h1>
-
-                        </div>
-                        )}
-=======
->>>>>>> a9d6159a94237ccc5079aac6c6b6376e39d42ee8
                     </div>
                 </div>
 
