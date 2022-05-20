@@ -32,10 +32,11 @@
     margin:0 5px ;
     text-decoration: none;
     opacity: 1;
-    color: 
-    #1C1B1B;
+    color: #1C1B1B;
     transition: 0.1s;
+    display: inline-block;
 }
+
 
 .nav_acc_ul :hover{
     opacity: 0.8;

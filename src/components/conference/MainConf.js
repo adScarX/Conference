@@ -16,8 +16,16 @@ function MainConf() {
   useEffect(() => {
     console.log("test");
   }, []);
+
+
+
+
+  
   return (
     <>
+    <div class="header">
+  <h2>Conferences</h2>
+</div>
       <nav className="navbar_1">
             <ul className="navbar_list_1">
             <Link to="/" className="link">

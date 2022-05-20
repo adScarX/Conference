@@ -1,5 +1,7 @@
-import React,{useEffect,useState} 
+import React,{useEffect,useState,useRef} 
 from "react";
+import { useParams } 
+from "react-router-dom";
 import "./account.css";
 import Nav 
 from "../nav_account/Nav";
@@ -11,14 +13,15 @@ import {HashLink as Link }
 from "react-router-hash-link";
 import {data_1} 
 from "./data"
-import {conferences} from "./../conference/data"
-import "./../conference/MainConf.css"
 import image_1 
 from "./../../img/email.png"
 import image_phone from 
 "./../../img/phone-call.png"
 import image_linkdin 
 from "./../../img/linkedin.png"
+import { id } from "date-fns/locale";
+
+
 
 function Account () {
     let navigate = useNavigate();
@@ -26,7 +29,7 @@ function Account () {
     
     axios.interceptors.request.use(
         config=>{
-            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNzUzMTQ4LCJpYXQiOjE2NTI3MTcxNDgsImp0aSI6ImI1YmU3NmYzYjVjZjQ5Y2Y4NDE0ZTgwMDdhNDNiMzdiIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.iTOG5riMizMF002rrdlUu9R9A3-j0NQh4Rgw_S33apY'
+            config.headers.authorization = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMTEyNDI2LCJpYXQiOjE2NTMwNzY0MjYsImp0aSI6ImMzYTlmYzIwMmM4MDRiOWFhNjUxNmQ2NjIzYzQ2OGViIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.YuKKCfsgyawrvLknzaJDuxTbQ0VzuIw9OhZQoK0eUIQ'
             return config
         },
         error=>{
@@ -35,9 +38,77 @@ function Account () {
     )
 
 
+
+
+    
+    
+    
+    const Myarticles =({messages})=>{
+        const messagesEndRef = useRef(null);
+        const scrollbottom=()=>{
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        };
+
+        useEffect(scrollbottom, [messages]);
+        
+        return(
+            <div className="originalConf_1" ref={messagesEndRef}  >
+          {messages.map((cle) => {
+            return (
+              <>
+        <div className="confDiv_1" key={cle} >
+              <div className="test_1">
+                  <div className="title_1">{cle.title}</div>
+
+                <div className="host_1">
+                   Hosted by {cle.host}, Location - {cle.startDate} to {cle.endate}
+                   </div>
+
+              </div>
+                
+
+                <button className="uploadartcl" >click here</button>
+      </div>
+            
+              </>
+            );
+          })}
+          
+          
+        </div>
+
+        )
+    }
+    
+
+    const Getartcl=({data})=>{
+        const ref=useRef(null);
+
+        return(
+            <>
+            <div className="confDiv_1" ref={ref} >
+                  <div className="test_1">
+                      <div className="title_1">{data.title}</div>
+    
+                    <div className="host_1">
+                       {data.description}  - {data.date_of_creation} 
+                       </div>
+    
+                  </div>
+                    
+    
+                    <button className="uploadartcl" />
+          </div>
+                
+                  </>
+
+        )
+    }
+
+
   
 // for upload image
-    let host="http://127.0.0.1:8000"
+    let host="http://127.0.0.1:8001"
     const [pic,setpic]=useState('')
     const [isloading,setisloading]=useState(false)
     let path=""
@@ -48,7 +119,7 @@ function Account () {
             data.append('profile_picture',files[0])
             console.log()
             path=files.path
-            axios.put('http://127.0.0.1:8000/users/profile',
+            axios.put('http://127.0.0.1:8001/users/profile',
             data
         )
         .then(res=>{
@@ -60,6 +131,32 @@ function Account () {
     
     }
 
+    const [article,setarticle]=useState({})
+    const {id}=useParams()
+
+    useEffect(()=>{
+        if(id){
+        axios.get('http://127.0.0.1:8001/articles/'
+        ).then(idss=>{
+            console.log(idss["data"])
+
+        }).catch(err=>{
+            console.log('id dont get')
+        })
+}})
+
+    useEffect(()=>{
+        axios.get('http://127.0.0.1:8001/articles/'
+        ).then(artc=>{
+            console.log(artc["data"])
+            setarticle(artc["data"])
+        }
+            ).catch(err=>{
+                console.log('failed')
+            })
+},[])
+
+
     
 
 
@@ -69,7 +166,7 @@ function Account () {
         useEffect(()=>
         {
             axios.get(
-                'http://127.0.0.1:8000/users/profile'
+                'http://127.0.0.1:8001/users/profile'
             ).then(reponse=>
                 {
                     console.log(reponse.data);
@@ -84,9 +181,16 @@ function Account () {
 
     const [confs, setConfs] = useState(data_1);
 
+
+
+
     
     return(
         <div className="account_page" id="account">
+
+<div class="header">
+  <h2>Account</h2>
+</div>
              <nav className="navbar_1">
             <ul className="navbar_list_1">
             <Link to="/" className="link">
@@ -175,47 +279,16 @@ function Account () {
                                </div>
                            </div>
                        </div>
-
-                        {data_1.data_1?.map((prfl)=>
-                        <div>
-                            <h1>{prfl.first_name}</h1>
-
-                        </div>
-                        )}
-
                     </div>
                 </div>
 
 
 
-                <div className="container_acc_r">
+                <div className="container_acc_r" >
                     <Nav/>
-
-                    <div className="originalConf">
-          {confs.map((conf) => {
-            return (
-              <>
-        <div className="confDiv">
-              <div className="test">
-                  <div className="title">{conf.title}</div>
-
-                <div className="host">
-                   Hosted by {conf.host}, Location - {conf.startDate} to {conf.endate}
-                   </div>
-
-                <div className="category"> Category: {conf.category}</div>
-
-              </div>
-                
-
-                <img className="image" src={conf.photo} alt={conf.photo} />
-      </div>
-
-              </>
-            );
-          })}
-        </div>
-
+                <Getartcl data={article}/>
+                    
+       
                 </div>
             </div>
 
