@@ -63,7 +63,11 @@ function CreateConf(){
     reviewers.push(candidate[0]);
     reviewerIds.push(candidate[0].id)
     reviewerNumber++;
+      isSubmit = false;
+
+
     }else{
+      isSubmit = false;
       setError(true)
     }
     
@@ -79,11 +83,13 @@ function CreateConf(){
     reviewerIds.pop(candidate[0].id)
   };
 
-  let test='';
+  // let test='';
 
   const switche =()=>{
     setShowReview(! showReview)
     setError(false)
+    isSubmit = false;
+    index--;
   }
 
   const[showReview,  setShowReview] = useState(true);
@@ -261,32 +267,44 @@ function CreateConf(){
         submitError = false
       }
 
-      if(! submitError && index > 0){
+      if(! submitError && index > 0 && isSubmit){
         console.log('success')
         let  bodyFormData = new FormData();
           bodyFormData ={
-          title:'gdfgdfg',
-          // formValues.title.toString(),
-          description:'gdfgfdg',
-          // textarea.toString(),
-          name_of_host:'dfgfdgdf',
-          // formValues.hostName.toString(),
-          categories:'gdfgdfg',
-          // formValues.categories.toString(),
-          start_date:'2022-05-20T12:00:00.000Z',
-          // format(startDate, 'yyyy-MM-dd hh:mm:ss.sss'),
-          end_date:'2022-05-20T12:00:00.000Z',
-          // format(endDate, 'yyyy-MM-dd hh:mm:ss.sss'),
-          submition_deadline:'2022-05-20T12:00:00.000Z',
-          // format(subDead, 'yyyy-MM-dd hh:mm:ss.sss'),
-          start_submition_date:'2022-05-20T12:00:00.000Z',
-          // format(subSd, 'yyyy-MM-dd hh:mm:ss.sss'),
+          title:
+          // 'gdfgdfg',
+          formValues.title.toString(),
+          description:
+          // 'gdfgfdg',
+          textarea.toString(),
+          name_of_host:
+          // 'dfgfdgdf',
+          formValues.hostName.toString(),
+          categories:
+          // 'gdfgdfg',
+          formValues.categories.toString(),
+          start_date:
+          // '2022-05-20T12:00:00.000Z',
+          format(startDate, 'yyyy-MM-dd hh:mm:ss.sss'),
+          end_date:
+          // '2022-05-20T12:00:00.000Z',
+          format(endDate, 'yyyy-MM-dd hh:mm:ss.sss'),
+          submition_deadline:
+          
+          // '2022-05-20T12:00:00.000Z',
+          format(subDead, 'yyyy-MM-dd hh:mm:ss.sss'),
+          start_submition_date:
+          // '2022-05-20T12:00:00.000Z',
+          format(subSd, 'yyyy-MM-dd hh:mm:ss.sss'),
           // logo:null,
-          location:'hfhfg',
-          // formValues.location.toString(),
-          site:'sgfgsdfg',
-          // formValues.site.toString(),
-          reviewers:['605f7435-6edf-4d2c-a141-6192e7c1f0a4']
+          location:
+          // 'hfhfg',
+          formValues.location.toString(),
+          site:
+          // 'sgfgsdfg',
+          formValues.site.toString(),
+          reviewers:
+          ['605f7435-6edf-4d2c-a141-6192e7c1f0a4']
           // reviewerIds
         }
         // console.log(bodyFormData)
@@ -299,9 +317,12 @@ function CreateConf(){
         //         'Content-Type': 'application/json,image'
         //       }}
         ).then((response)=>{
-          console.log(response['data'])
+          console.log(response.data)
+          // console.log(response['data'])
         })
         } catch (error) {
+          console.log('hna')
+          console.log(error.toString())
         }        
       }else if(submitError){
         console.log('failure')
