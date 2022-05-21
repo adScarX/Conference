@@ -8,7 +8,6 @@ import {HashLink as Link } from "react-router-hash-link";
 import { useNavigate } from "react-router-dom";
 
 
-
 function MainConf() {
   let navigate_2=useNavigate();
   let navigate = useNavigate();
@@ -16,10 +15,6 @@ function MainConf() {
   useEffect(() => {
     console.log("test");
   }, []);
-
-
-
-
   
   return (
     <>

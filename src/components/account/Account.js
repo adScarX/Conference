@@ -19,7 +19,7 @@ import image_phone from
 "./../../img/phone-call.png"
 import image_linkdin 
 from "./../../img/linkedin.png"
-import { id } from "date-fns/locale";
+import fileDownload from 'js-file-download'
 
 
 
@@ -37,19 +37,24 @@ function Account () {
         }
     )
 
-
-
+    
+    const download=(url)=>{
+       axios.get(url,{responseType: 'blob'}
+       ).then(res=>{
+           fileDownload(res.data)
+       })
+   }
+  
+   const [urll,seturll]=useState('')
+   const geturl=()=>{
+       axios.get('http://127.0.0.1:8001/articles/')
+   }
 
     
     
     
     const Myarticles =({messages})=>{
         const messagesEndRef = useRef(null);
-        const scrollbottom=()=>{
-            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-        };
-
-        useEffect(scrollbottom, [messages]);
         
         return(
             <div className="originalConf_1" ref={messagesEndRef}  >
@@ -65,9 +70,10 @@ function Account () {
                    </div>
 
               </div>
-                
-
-                <button className="uploadartcl" >click here</button>
+              <input className="uploadartcl" 
+              onClick={()=>{this.download('http://127.0.0.1:8001/articles/1')}}
+              type="file"
+              />
       </div>
             
               </>
@@ -81,8 +87,9 @@ function Account () {
     }
     
 
-    const Getartcl=({data})=>{
+    const Getartcl=(data)=>{
         const ref=useRef(null);
+        
 
         return(
             <>
@@ -114,16 +121,18 @@ function Account () {
     let path=""
 
     
-    const uploadImage=({target:files})=>{
+    const uploadImage=(e)=>{
             const data = new FormData()
-            data.append('profile_picture',files[0])
-            console.log()
-            path=files.path
+            data.append('profile_picture',e.target.files[0])
+            console.log(data)
+            path=e.target.path
             axios.put('http://127.0.0.1:8001/users/profile',
-            data
+            data,{ headers: {
+                "Content-Type": "multipart/form-data",
+              },}
         )
         .then(res=>{
-            setpic(files[0].path)
+
             setdata_profile(res.data)
             setisloading(!isloading)
             console.log('here_pic')
@@ -131,22 +140,13 @@ function Account () {
     
     }
 
-    const [article,setarticle]=useState({})
+    ////////////////////////////////////////////////
+
+    const [article,setarticle]=useState([])
     const {id}=useParams()
 
     useEffect(()=>{
-        if(id){
-        axios.get('http://127.0.0.1:8001/articles/'
-        ).then(idss=>{
-            console.log(idss["data"])
-
-        }).catch(err=>{
-            console.log('id dont get')
-        })
-}})
-
-    useEffect(()=>{
-        axios.get('http://127.0.0.1:8001/articles/'
+        axios.get('http://127.0.0.1:8001/articles/list/path'
         ).then(artc=>{
             console.log(artc["data"])
             setarticle(artc["data"])
@@ -223,7 +223,6 @@ function Account () {
                         <div className="form-controll">
                             <input 
                             type="file"
-                            accept=".png"
                             onChange={uploadImage}
                             name='file_up'
                             />
@@ -286,7 +285,7 @@ function Account () {
 
                 <div className="container_acc_r" >
                     <Nav/>
-                <Getartcl data={article}/>
+                <Myarticles messages={article}/>
                     
        
                 </div>

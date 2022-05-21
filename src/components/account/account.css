@@ -287,10 +287,6 @@ h1{
 
 
 .uploadartcl{
-    background-image: url('./../../img/sort.png');
-    margin: 2%;
-    width: 10%;
-    height: 100px;
-    border-radius: 7px;
-    float: right;
+    background-image: url("./../../img/sort.png");
+    outline: none;
 }
