@@ -5,33 +5,34 @@ import { useNavigate }
 from "react-router-dom";
 import {HashLink as Link } 
 from "react-router-hash-link";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import {conferences} from "./data.js"
 import {users} from "./data.js"
-import {confreviewers} from "./data.js"
-import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+// import {confreviewers} from "./data.js"
+// import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+// import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios"
 
 
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 
-import { ReactDialogBox } from 'react-js-dialog-box';
+// import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css'
-import Popup from "./Popup.js";
+// import Popup from "./Popup.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import getTime from "date-fns/getTime";
-import { EmojiObjects, Password } from "@mui/icons-material";
+// import getTime from "date-fns/getTime";
+// import { EmojiObjects, Password } from "@mui/icons-material";
 
  let reviewerNumber = 0;
  let reviewerIds=[]
  let submitError = false;
  let index = 0;
  let isSubmit = false;
+ let isImage = false;
 
 function CreateConf(){
   axios.interceptors.request.use(
@@ -57,21 +58,22 @@ function CreateConf(){
   
   const removeItem = (id) => {
     if(reviewerNumber < 3){
-      let candidate = candidates.filter((x)=> x.id ==id);
+      let candidate = candidates.filter((x)=> x.id ===id);
     let newUsers = candidates.filter((y) => y.id !== id);
     setCandidates(newUsers);
     reviewers.push(candidate[0]);
     reviewerIds.push(candidate[0].id)
     reviewerNumber++;
+      isSubmit = false;
+
+
     }else{
+      isSubmit = false;
       setError(true)
     }
-    
-    // setReviewers(confreviewers,candidate[0])
-    // reviewers.push(candidate)
   };
   const removeReviewer = (id) => {
-    let candidate = reviewers.filter((x)=> x.id ==id);
+    let candidate = reviewers.filter((x)=> x.id ===id);
     let newUsers = reviewers.filter((y) => y.id !== id);
     setReviewers(newUsers);
     candidates.push(candidate[0])
@@ -79,21 +81,19 @@ function CreateConf(){
     reviewerIds.pop(candidate[0].id)
   };
 
-  let test='';
 
   const switche =()=>{
     setShowReview(! showReview)
     setError(false)
+    isSubmit = false;
+    index--;
   }
 
   const[showReview,  setShowReview] = useState(true);
   const[candidates, setCandidates] = useState(users);
   const [error,setError] = useState(false)
  
-  const[reviewers, setReviewers] = useState(
-    // confreviewers
-    []
-    )
+  const[reviewers, setReviewers] = useState([])
 
   let navigate = useNavigate();
     let navigate_2=useNavigate();
@@ -102,29 +102,30 @@ function CreateConf(){
   const handleChange = (event) => {
     setTextarea(event.target.value)
   }
+  const[image,setImage] = useState()
+  const[logo,setLogo]=useState(null)
 
   const handleUpload = (event)=>{
-    console.log(event.target.files[0])
-   const fileUploaded = event.target.files[0];
-   console.log(fileUploaded)
+    isImage = true;
+   setImage(event.target.files[0]);
+  //  const data = new FormData();
+  //  data.append('logo',event.target.files[0])
+  //  console.log(data)
+   setLogo(event.target.files[0])
   }
-
   const hiddenFileInput = React.useRef(null);
 
   
 
   const handleClick = (event) => {
-    hiddenFileInput.current.click();
-    
-
-  };
+    hiddenFileInput.current.click();};
     
 
     const handlesDate = (date)=>{
       setStartDate(date)
-      console.log(date)
-      var x = format(date, 'yyyy-MM-dd hh:mm:ss.sss')
-      console.log(x)
+      // console.log(date)
+      // var x = format(date, 'yyyy-MM-dd hh:mm:ss.sss')
+      // console.log(x)
 
     }
 
@@ -199,7 +200,7 @@ function CreateConf(){
 
     const validateReviewers = (reviewerNumber)=>{
       let error ='';
-      if(reviewerNumber == 0){
+      if(reviewerNumber === 0){
         error = '* At least one reviewer'
       }
       if(reviewerNumber > 3){
@@ -247,6 +248,22 @@ function CreateConf(){
 
       // if()
     }
+    const url = 'http://127.0.0.1:8000/users/list/path'
+
+    useEffect(() => {
+      index = index +2;
+    axios.get(url)
+      .then((resp) => {
+        if (resp.status >= 200 && resp.status <= 299) {
+          console.log(resp.data)
+          setCandidates(resp.data)
+        } else {
+          
+        }
+      })
+      
+      .catch((error) => console.log(error));
+  }, []);
 
     useEffect(()=>{
       console.log(index)
@@ -261,14 +278,17 @@ function CreateConf(){
         submitError = false
       }
 
-      if(! submitError && index > 0){
+      if(! submitError && index > 0 && isSubmit){
         console.log('success')
-        let  bodyFormData = new FormData();
-          bodyFormData ={
-          title:formValues.title.toString(),
-          
-          description:textarea.toString(),
-          
+       
+
+        // let  bodyFormData = new FormData();
+        console.log(logo)
+          let bodyFormData ={
+          title:
+          formValues.title.toString(),
+          description:
+          textarea.toString(),
           name_of_host:
           formValues.hostName.toString(),
           categories:
@@ -281,27 +301,35 @@ function CreateConf(){
           format(subDead, 'yyyy-MM-dd hh:mm:ss.sss'),
           start_submition_date:
           format(subSd, 'yyyy-MM-dd hh:mm:ss.sss'),
-          logo:null,
           location:
           formValues.location.toString(),
+          // logo:logo,
           site:
           formValues.site.toString(),
           reviewers:
+          // ['605f7435-6edf-4d2c-a141-6192e7c1f0a4']
           reviewerIds
         }
+        console.log(logo)
+
         // console.log(bodyFormData)
         try {
           axios.post('http://127.0.0.1:8000/conferences/',
         bodyFormData,
-        // data
-        //  {headers: {
-        //         // 'Accept': 'application/json',
-        //         'Content-Type': 'application/json,image'
-        //       }}
+        
         ).then((response)=>{
-          console.log(response['data'])
+          console.log(response.data)
+          if(isImage){
+            let data = new FormData();
+            data.append('logo',logo)
+            data.append('title',formValues.location)
+            axios.put('http://127.0.0.1:8000/conferences/'+response.data['id'],data).then((res)=>console.log(res.toString()))
+          }
+          // console.log(response['data'])
         })
         } catch (error) {
+          console.log('hna')
+          console.log(error.toString())
         }        
       }else if(submitError){
         console.log('failure')
@@ -405,6 +433,8 @@ function CreateConf(){
         </button>
         <input ref={hiddenFileInput} type="file" onChange={handleUpload} style={{display:'none'}}>
         </input>
+
+        <p>{isImage && image.name}</p>
 
 
 
