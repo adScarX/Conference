@@ -32,6 +32,7 @@ import "react-datepicker/dist/react-datepicker.css";
  let submitError = false;
  let index = 0;
  let isSubmit = false;
+ let isImage = false;
 
 function CreateConf(){
   axios.interceptors.request.use(
@@ -80,7 +81,6 @@ function CreateConf(){
     reviewerIds.pop(candidate[0].id)
   };
 
-  // let test='';
 
   const switche =()=>{
     setShowReview(! showReview)
@@ -93,10 +93,7 @@ function CreateConf(){
   const[candidates, setCandidates] = useState(users);
   const [error,setError] = useState(false)
  
-  const[reviewers, setReviewers] = useState(
-    // confreviewers
-    []
-    )
+  const[reviewers, setReviewers] = useState([])
 
   let navigate = useNavigate();
     let navigate_2=useNavigate();
@@ -105,29 +102,30 @@ function CreateConf(){
   const handleChange = (event) => {
     setTextarea(event.target.value)
   }
+  const[image,setImage] = useState()
+  const[logo,setLogo]=useState(null)
 
   const handleUpload = (event)=>{
-    console.log(event.target.files[0])
-   const fileUploaded = event.target.files[0];
-   console.log(fileUploaded)
+    isImage = true;
+   setImage(event.target.files[0]);
+  //  const data = new FormData();
+  //  data.append('logo',event.target.files[0])
+  //  console.log(data)
+   setLogo(event.target.files[0])
   }
-
   const hiddenFileInput = React.useRef(null);
 
   
 
   const handleClick = (event) => {
-    hiddenFileInput.current.click();
-    
-
-  };
+    hiddenFileInput.current.click();};
     
 
     const handlesDate = (date)=>{
       setStartDate(date)
-      console.log(date)
-      var x = format(date, 'yyyy-MM-dd hh:mm:ss.sss')
-      console.log(x)
+      // console.log(date)
+      // var x = format(date, 'yyyy-MM-dd hh:mm:ss.sss')
+      // console.log(x)
 
     }
 
@@ -282,8 +280,11 @@ function CreateConf(){
 
       if(! submitError && index > 0 && isSubmit){
         console.log('success')
-        let  bodyFormData = new FormData();
-          bodyFormData ={
+       
+
+        // let  bodyFormData = new FormData();
+        console.log(logo)
+          let bodyFormData ={
           title:
           formValues.title.toString(),
           description:
@@ -302,23 +303,28 @@ function CreateConf(){
           format(subSd, 'yyyy-MM-dd hh:mm:ss.sss'),
           location:
           formValues.location.toString(),
+          // logo:logo,
           site:
           formValues.site.toString(),
           reviewers:
-          ['605f7435-6edf-4d2c-a141-6192e7c1f0a4']
-          // reviewerIds
+          // ['605f7435-6edf-4d2c-a141-6192e7c1f0a4']
+          reviewerIds
         }
+        console.log(logo)
+
         // console.log(bodyFormData)
         try {
           axios.post('http://127.0.0.1:8000/conferences/',
         bodyFormData,
-        // data
-        //  {headers: {
-        //         // 'Accept': 'application/json',
-        //         'Content-Type': 'application/json,image'
-        //       }}
+        
         ).then((response)=>{
           console.log(response.data)
+          if(isImage){
+            let data = new FormData();
+            data.append('logo',logo)
+            data.append('title',formValues.location)
+            axios.put('http://127.0.0.1:8000/conferences/'+response.data['id'],data).then((res)=>console.log(res.toString()))
+          }
           // console.log(response['data'])
         })
         } catch (error) {
@@ -427,6 +433,8 @@ function CreateConf(){
         </button>
         <input ref={hiddenFileInput} type="file" onChange={handleUpload} style={{display:'none'}}>
         </input>
+
+        <p>{isImage && image.name}</p>
 
 
 
