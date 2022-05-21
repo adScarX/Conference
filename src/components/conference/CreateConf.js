@@ -108,9 +108,6 @@ function CreateConf(){
   const handleUpload = (event)=>{
     isImage = true;
    setImage(event.target.files[0]);
-  //  const data = new FormData();
-  //  data.append('logo',event.target.files[0])
-  //  console.log(data)
    setLogo(event.target.files[0])
   }
   const hiddenFileInput = React.useRef(null);
@@ -322,7 +319,6 @@ function CreateConf(){
           if(isImage){
             let data = new FormData();
             data.append('logo',logo)
-            data.append('title',formValues.location)
             axios.put('http://127.0.0.1:8000/conferences/'+response.data['id'],data).then((res)=>console.log(res.toString()))
           }
           // console.log(response['data'])
