@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 function MainConf() {
   let navigate_2=useNavigate();
   let navigate = useNavigate();
+  let navigate_3 = useNavigate();
   const [confs, setConfs] = useState(conferences);
   useEffect(() => {
     console.log("test");
@@ -58,7 +59,7 @@ function MainConf() {
             const{id} = conf;
             return (
               
-        <div className="confDiv" key={id}>
+        <div className="confDiv" key={id} onClick={()=>navigate_3("/Conf/"+id)}>
               <div className="test">
                   <div className="title">{conf.title}</div>
 

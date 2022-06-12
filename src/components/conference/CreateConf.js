@@ -108,9 +108,6 @@ function CreateConf(){
   const handleUpload = (event)=>{
     isImage = true;
    setImage(event.target.files[0]);
-  //  const data = new FormData();
-  //  data.append('logo',event.target.files[0])
-  //  console.log(data)
    setLogo(event.target.files[0])
   }
   const hiddenFileInput = React.useRef(null);
@@ -138,7 +135,7 @@ function CreateConf(){
     const handlesubDead = (date)=>{
       setsubDead(date)
     }
-     const [startDate, setStartDate] = useState();
+    const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [subSd, setsubSd] = useState();
     const [subDead, setsubDead] = useState();
@@ -248,7 +245,7 @@ function CreateConf(){
 
       // if()
     }
-    const url = 'http://127.0.0.1:8000/users/list/path'
+    const url = 'http://127.0.0.1:8001/users/list/path'
 
     useEffect(() => {
       index = index +2;
@@ -314,7 +311,7 @@ function CreateConf(){
 
         // console.log(bodyFormData)
         try {
-          axios.post('http://127.0.0.1:8000/conferences/',
+          axios.post('http://127.0.0.1:8001/conferences/',
         bodyFormData,
         
         ).then((response)=>{
@@ -322,8 +319,7 @@ function CreateConf(){
           if(isImage){
             let data = new FormData();
             data.append('logo',logo)
-            data.append('title',formValues.location)
-            axios.put('http://127.0.0.1:8000/conferences/'+response.data['id'],data).then((res)=>console.log(res.toString()))
+            axios.put('http://127.0.0.1:8001/conferences/'+response.data['id'],data).then((res)=>console.log(res.toString()))
           }
           // console.log(response['data'])
         })
@@ -339,6 +335,10 @@ function CreateConf(){
       index ++;
 
     },[isSubmit]);
+
+
+
+    
 
     return(
         <main>
