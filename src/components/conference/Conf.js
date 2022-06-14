@@ -14,7 +14,6 @@ import {conferences} from "./data"
 
 function Conf(){
     const {id} = useParams();
-    console.log(id)
     let navigate_2=useNavigate();
     let navigate = useNavigate();
 
@@ -67,7 +66,7 @@ function Conf(){
                      </div>
 
                      <div className="btnparam">
-                         <button className="apply-to-join" ><p className="txt">Apply to join</p></button>
+                         <button className="apply-to-join" onClick={()=>navigate("/Conf/"+id+"/ApplyForm")} ><p className="txt">Apply to join</p></button>
                      </div>
 
 
