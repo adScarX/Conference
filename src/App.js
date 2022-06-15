@@ -6,6 +6,7 @@ import MainConf from "./components/conference/MainConf"
 import CreateConf from "./components/conference/CreateConf"
 import { BrowserRouter as Router,Route,Routes } from "react-router-dom"
 import Conf from "./components/conference/Conf"
+import Edit_art from "./components/edit_Article/Edit_art"
 
 
 
@@ -20,6 +21,7 @@ function App () {
          <Route path="/CreateConf" element={<CreateConf/>}/>
          <Route path="/MainConf" element={<MainConf/>}/>
          <Route path="/account" element={<Account/>}/>
+         <Route path="/Edit_art/:id" element={<Edit_art/>}/>
        </Routes>
       
       </Router>

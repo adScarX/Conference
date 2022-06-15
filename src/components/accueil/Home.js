@@ -4,11 +4,12 @@ import Footer from "../footer/Footer";
 import ArticleL from "../article/Article_L"
 import ArticleR from "..//article/Article_R"
 import Navbar from "../navbar/Navbar";
-
+import { useNavigate } from "react-router-dom";
 
 
 
 function Home (){
+    let navigat3=useNavigate();
     return (
          <div className="home" id="home">
              <div className="home_page">
@@ -18,7 +19,7 @@ function Home (){
                  <div className="img"></div>
                  </div>
                  <h5 className="paragrahe">Find a Conference, Apply and Participate</h5>
-                 <button className="btn_t"><p>View Conferences</p></button>    
+                 <button className="btn_t" onClick={()=>{navigat3="/Edit_art"}}><p>View Conferences</p></button>  
             </div>
             <div className="classarticle">
             <ArticleL 
