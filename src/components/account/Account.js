@@ -25,7 +25,11 @@ function Account() {
   axios.interceptors.request.use(
     (config) => {
       config.headers.authorization =
+<<<<<<< HEAD
         "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MjkyNzMxLCJpYXQiOjE2NTUyNTY3MzEsImp0aSI6IjM4ODM0NGI2OTI5ZjQzZGU5NjRhMDc5NzMzNGM3NzJjIiwidXNlcl9pZCI6IjNlNDJiYWJjLWI3YTUtNGZjZC1hNTVlLWM2YjY3NmFiZGI1NiJ9.G592EE8qtOUxOALsChAxzzblA7b1ePUvsYBL2LDzdsw";
+=======
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NDMzMDY5LCJpYXQiOjE2NTUzOTcwNjksImp0aSI6IjNhZWQ4NmFhMzZlOTQ5Yzg5N2RjYzU4YzVhNDFjM2ZlIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.Q1kfPtvKLtxe8Wz3CC353se5vyURHV7G8ac-liPPhOY";
+>>>>>>> 0facdfce9925e736ce52196bc7375ef186df48af
       return config;
     },
     (error) => {
@@ -252,6 +256,7 @@ function Account() {
     <div className="account_page" id="account">
       <div className="navv">
         <div className="navbar_11">
+<<<<<<< HEAD
           <ul className="navbar_list_11">
             <Link to="/" className="link">
               <div className="list_item_11">
@@ -266,6 +271,49 @@ function Account() {
               }}
             >
               <p>Conferences</p>
+=======
+        <div className="navbar_list_11">
+          <Link to="/" className="link">
+            <div className="list_item_11"><p>Home</p></div>
+          </Link>
+
+          <div
+            className="list_item_11"
+            onClick={() => {
+              navigate_2("/MainConf");
+            }}
+          >
+            <p>Conferences</p>
+          </div>
+
+          <Link to="/#footer" smooth className="link">
+            <div className="list_item_11"><p>About us</p> </div>
+          </Link>
+          <Link to="/#footer" smooth className="link">
+            <div className="list_item_11"><p>Contact us</p> </div>
+          </Link>
+
+          <div
+            className="list_item_11"
+            onClick={() => {
+              navigate("/account");
+            }}
+          >
+           <p>Account</p> 
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <div className="proff">
+      <div className="container_acc">
+        <div className="container_acc_l">
+
+          {/*  ////////////////////////////// */}
+          <div className="container_acc_l_logo">
+            <div className="form-controll">
+              <input type="file" onChange={()=>{setbool(!bool)}} name="file_up" />
+>>>>>>> 0facdfce9925e736ce52196bc7375ef186df48af
             </div>
 
             <Link to="/#footer" smooth className="link">
