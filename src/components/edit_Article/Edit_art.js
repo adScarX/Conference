@@ -8,18 +8,16 @@ import DownloadIcon from "@mui/icons-material/Download";
 import Popup from "../popup/Popup";
 var idd = "x";
 
-var objett={};
-
+var objett = {};
 
 function Edit_art() {
-  var[dics,setDics]=useState([]);
-  const[dicx,setdicx]=useState([])
-  const[dic,setDic]=useState([
-  //   {
-  //   question:"",
-  //   answer:null,
-  // }
-])
+  var [dics, setDics] = useState([]);
+  const [dic, setDic] = useState([
+    //   {
+    //   question:"",
+    //   answer:null,
+    // }
+  ]);
 
   axios.interceptors.request.use(
     (config) => {
@@ -54,11 +52,10 @@ function Edit_art() {
         axios.get(url).then((resp) => {
           setqst(resp["data"]);
           console.log(resp["data"]);
-          for(let i =0;i<resp["data"].length;i++){
-            let x = {}
-            dic.push({question:resp["data"][i].id,
-          answer:null})
-          console.log(dic)
+          for (let i = 0; i < resp["data"].length; i++) {
+            let x = {};
+            dic.push({ question: resp["data"][i].id, answer: null });
+            console.log(dic);
           }
         });
       })
@@ -72,24 +69,20 @@ function Edit_art() {
   };
 
   const [qst, setqst] = useState([]);
-  const [valeur,setvaleur]=useState(false);
+  const [valeur, setvaleur] = useState(false);
 
-// useEffect(()=>{console.log(dics)})
-  const changeetat=(e,i)=>{
-    // const {value}=e.target;
-    console.log(e)
-     setvaleur(e);
-     dic[i].answer = e;
-     console.log(dic)
-     setDics(dic)
+  const changeetat = (e, i) => {
+    
+    dic[i].answer = e;
+    setDics(dic);
 
     //  console.log(valeur);
-  }
+  };
 
   const Question = ({ data }) => {
     return (
       <div>
-        {data.map((q,i) => {
+        {data.map((q, i) => {
           return (
             <form>
               <div className="qst_box">
@@ -102,7 +95,7 @@ function Edit_art() {
                     id="html"
                     name="answer"
                     value="true"
-                    onChange={()=>changeetat(true,i)}
+                    onChange={() => changeetat(true,i)}
                   />
                     <label for="html">YES</label> {" "}
                   <input
@@ -110,7 +103,7 @@ function Edit_art() {
                     id="css"
                     name="answer"
                     value="false"
-                    onChange={()=>changeetat(false,i)}
+                    onChange={() => changeetat(false, i)}
                   />
                     <label for="css">NO</label>
                 </div>
@@ -121,44 +114,38 @@ function Edit_art() {
       </div>
     );
   };
-  
-  const tabletri=()=>{
-        let x = dics.filter((item)=> item.answer != null)
-        setDics(x)
-        console.log(x)
-        objett = dics
-        console.log(objett)
-        return x;
 
-  }
-  
+  const tabletri = () => {
+    let x = dics.filter((item) => item.answer != null);
+    setDics(x);
+    console.log(x);
+    objett = dics;
+    console.log(objett);
+    return x;
+  };
 
-  const[cmnt,setcmnt]=useState("");
-  const[score,setscore]=useState(0)
-  const[done,setdone]=useState(false)
+  const [cmnt, setcmnt] = useState("");
+  const [score, setscore] = useState(0);
+  const [done, setdone] = useState(false);
 
-  const changecmnt=(e)=>{
-    setcmnt(e.target.value)
-  }
+  const changecmnt = (e) => {
+    e.preventDefault()
+    setcmnt(e.target.value);
+  };
 
-
-  useEffect(()=>{
-   let objet={
-    remark:cmnt.toString(),
-    score:score,
-    review_done:done,
-    article:id,
-   answers:tabletri()
-  }   
-   console.log(objet)
-    axios.post(host+"/report/report/",objet).then((rr)=>{
-      console.log(rr)
-    })
-    },[done]
-  )
-  
-
-  
+  useEffect(() => {
+    let objet = {
+      remark: cmnt.toString(),
+      score: score,
+      review_done: done,
+      article: id,
+      answers: tabletri(),
+    };
+    console.log(objet);
+    axios.post(host + "/report/report/", objet).then((rr) => {
+      console.log(rr);
+    });
+  }, [done]);
 
   // const calculescore=()=>{
   //   let cpt=0;
@@ -170,10 +157,6 @@ function Edit_art() {
   //   }
   //   return cpt;
   // }
-
-
-
-
 
   return (
     <div className="edit_page">
@@ -243,17 +226,18 @@ function Edit_art() {
               <Question data={qst} />
               <div className="scr_50">
                 <div className="scr_p">
-                 <p>.  From 0 to 50 whats your rating for the article ?</p>
+                  <p>. From 0 to 50 whats your rating for the article ?</p>
                 </div>
                 <div className="scr_inp">
                   <div className="scr_inp_inp">
-                  <input 
-                  type="number"
-                  max={100}
-                  min={0}
-                  className="innp"
-                  onChange={(e)=>setscore(e.target.value)}
-                  /></div>
+                    <input
+                      type="number"
+                      max={100}
+                      min={0}
+                      className="innp"
+                      onChange={(event) => setscore(event.target.value)}
+                    />
+                  </div>
                   <div className="scr_inp_50">/100</div>
                 </div>
               </div>
@@ -264,14 +248,13 @@ function Edit_art() {
               <textarea
                 name="description"
                 className="spec_art"
-                // value={textarea}
                 onChange={changecmnt}
                 placeholder="Comment"
               />
             </div>
             <div className="space_btn">
               <div className="Submit_div">
-                <button className="Submit_btn" onClick={()=>setdone(true)}>
+                <button className="Submit_btn" onClick={() => setdone(true)}>
                   <p>Submit result</p>
                 </button>
               </div>
