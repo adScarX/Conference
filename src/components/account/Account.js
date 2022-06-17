@@ -25,7 +25,7 @@ function Account() {
   axios.interceptors.request.use(
     (config) => {
       config.headers.authorization =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MjgxNDM5LCJpYXQiOjE2NTUyNDU0MzksImp0aSI6IjI5YTQzYzE4ODVhYTQyYzk5OTg3ZTg0OTFiNzZlOWU5IiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.s4jX2_cvCUMsEx2x_JFIvNpXWATwoVgQXku6FEj1G-4";
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NDMzMDY5LCJpYXQiOjE2NTUzOTcwNjksImp0aSI6IjNhZWQ4NmFhMzZlOTQ5Yzg5N2RjYzU4YzVhNDFjM2ZlIiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.Q1kfPtvKLtxe8Wz3CC353se5vyURHV7G8ac-liPPhOY";
       return config;
     },
     (error) => {
@@ -260,7 +260,7 @@ function Account() {
     <div className="account_page" id="account">
       <div className="navv">
         <div className="navbar_11">
-        <ul className="navbar_list_11">
+        <div className="navbar_list_11">
           <Link to="/" className="link">
             <div className="list_item_11"><p>Home</p></div>
           </Link>
@@ -289,7 +289,7 @@ function Account() {
           >
            <p>Account</p> 
           </div>
-        </ul>
+        </div>
       </div>
       </div>
       

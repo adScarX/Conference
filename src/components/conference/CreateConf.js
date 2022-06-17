@@ -163,22 +163,8 @@ function CreateConf() {
     if (!values.categories) {
       errors.categories = "* At least one category is required";
     }
-<<<<<<< HEAD
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
-    const [subSd, setsubSd] = useState();
-    const [subDead, setsubDead] = useState();
-
-    
-
-    const handle = (e) =>{
-      const {name,value} = e.target;
-      setFormValues({...formValues, [name]:value});
-
-=======
     if (!values.site) {
       errors.site = "* Conference site is required";
->>>>>>> d9b1ebc062584dafbf72bdf3e4065bf3104b50e7
     }
     if (!values.location) {
       errors.location = "* Location is required";
@@ -246,15 +232,9 @@ function CreateConf() {
 
     return dateEr;
 
-<<<<<<< HEAD
-      // if()
-    }
-    const url = 'http://127.0.0.1:8001/users/list/path'
-=======
     // if()
   };
   const url = "http://127.0.0.1:8000/users/list/path";
->>>>>>> d9b1ebc062584dafbf72bdf3e4065bf3104b50e7
 
   useEffect(() => {
     index = index + 2;
@@ -289,62 +269,6 @@ function CreateConf() {
       submitError = false;
     }
 
-<<<<<<< HEAD
-      if(! submitError && index > 0 && isSubmit){
-        console.log('success')
-       
-
-        // let  bodyFormData = new FormData();
-        console.log(logo)
-          let bodyFormData ={
-          title:
-          formValues.title.toString(),
-          description:
-          textarea.toString(),
-          name_of_host:
-          formValues.hostName.toString(),
-          categories:
-          formValues.categories.toString(),
-          start_date:
-          format(startDate, 'yyyy-MM-dd hh:mm:ss.sss'),
-          end_date:
-          format(endDate, 'yyyy-MM-dd hh:mm:ss.sss'),
-          submition_deadline:
-          format(subDead, 'yyyy-MM-dd hh:mm:ss.sss'),
-          start_submition_date:
-          format(subSd, 'yyyy-MM-dd hh:mm:ss.sss'),
-          location:
-          formValues.location.toString(),
-          // logo:logo,
-          site:
-          formValues.site.toString(),
-          reviewers:
-          // ['605f7435-6edf-4d2c-a141-6192e7c1f0a4']
-          reviewerIds
-        }
-        console.log(logo)
-
-        // console.log(bodyFormData)
-        try {
-          axios.post('http://127.0.0.1:8001/conferences/',
-        bodyFormData,
-        
-        ).then((response)=>{
-          console.log(response.data)
-          if(isImage){
-            let data = new FormData();
-            data.append('logo',logo)
-            axios.put('http://127.0.0.1:8001/conferences/'+response.data['id'],data).then((res)=>console.log(res.toString()))
-          }
-          // console.log(response['data'])
-        })
-        } catch (error) {
-          console.log('hna')
-          console.log(error.toString())
-        }        
-      }else if(submitError){
-        console.log('failure')
-=======
     if (!submitError && index > 0 && isSubmit) {
       console.log("success");
 
@@ -389,7 +313,6 @@ function CreateConf() {
       } catch (error) {
         console.log("hna");
         console.log(error.toString());
->>>>>>> d9b1ebc062584dafbf72bdf3e4065bf3104b50e7
       }
     } else if (submitError) {
       console.log("failure");
@@ -401,23 +324,12 @@ function CreateConf() {
 
   const [isOpenModal, setOpenModal] = useState(false);
 
-<<<<<<< HEAD
-
-
-    
-
-    return(
-        <main>
-         <nav className="navbar_1">
-            <ul className="navbar_list_1">
-=======
   return (
     <main>
       <button onClick={() => setOpenModal(true)}></button>
       {!isOpenModal && (
         <nav className="navbar_1">
           <ul className="navbar_list_1">
->>>>>>> d9b1ebc062584dafbf72bdf3e4065bf3104b50e7
             <Link to="/" className="link">
               <li className="list_item_1">Home</li>
             </Link>
