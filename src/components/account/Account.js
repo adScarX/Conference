@@ -19,13 +19,13 @@ function Account() {
   let host = "http://127.0.0.1:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
-  let navigate_4=useNavigate();
+  let navigate_4 = useNavigate();
   const hiddenFileInput = React.useRef(null);
 
   axios.interceptors.request.use(
     (config) => {
       config.headers.authorization =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MjgxNDM5LCJpYXQiOjE2NTUyNDU0MzksImp0aSI6IjI5YTQzYzE4ODVhYTQyYzk5OTg3ZTg0OTFiNzZlOWU5IiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.s4jX2_cvCUMsEx2x_JFIvNpXWATwoVgQXku6FEj1G-4";
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MjkyNzMxLCJpYXQiOjE2NTUyNTY3MzEsImp0aSI6IjM4ODM0NGI2OTI5ZjQzZGU5NjRhMDc5NzMzNGM3NzJjIiwidXNlcl9pZCI6IjNlNDJiYWJjLWI3YTUtNGZjZC1hNTVlLWM2YjY3NmFiZGI1NiJ9.G592EE8qtOUxOALsChAxzzblA7b1ePUvsYBL2LDzdsw";
       return config;
     },
     (error) => {
@@ -38,8 +38,8 @@ function Account() {
   const [image, setimage] = useState([]);
   const [data_profile, setdata_profile] = useState({});
   let path = "";
-  const [bool,setbool]=useState(false)
-  
+  const [bool, setbool] = useState(false);
+
   // const uploadImage = (e) => {
   //   const data = new FormData();
   //   data.append("profile_picture", e.target.files[0]);
@@ -56,16 +56,10 @@ function Account() {
   //  uploadImage()
   // },[bool])
 
-
-
-
-
-
   const [file, setFile] = useState();
-    function handleChange(e) {
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
-  
+  function handleChange(e) {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
 
   useEffect(() => {
     axios
@@ -100,7 +94,6 @@ function Account() {
   const saveFile = (urll) => {
     saveAs(urll, "article.pdf");
   };
-
 
   const Getartcl = ({ data }) => {
     const ref = useRef(null);
@@ -172,7 +165,8 @@ function Account() {
                     <div className="title_2">{cle.title}</div>
                     <div className="host_2">
                       <h5>
-                        {cle.name_of_host},{cle.location} - {cle.start_date} , {cle.end_date}
+                        {cle.name_of_host},{cle.location} - {cle.start_date} ,{" "}
+                        {cle.end_date}
                       </h5>
                     </div>
                   </div>
@@ -191,11 +185,7 @@ function Account() {
                   )}
                 </div>
                 <div className="downfile_2">
-                  <img
-                    src={host+cle.logo}
-                    alt=""
-                    className="down"
-                  />
+                  <img src={host + cle.logo} alt="" className="down" />
                 </div>
               </div>
             </>
@@ -218,30 +208,34 @@ function Account() {
     return (
       <>
         {data.map((cle) => {
-          const{id}=cle
+          const { id } = cle;
           return (
             <>
-            <div className="confDiv_3" key={id} onClick={()=>navigate_4("/Edit_art/"+id)}>
-              <div className="info_3">
-                <div className="test_3">
-                  <div className="title_3">{cle.title}</div>
-                  <div className="host_3">
-                    <h5>
-                      {cle.conference_id.title} - {cle.start_date}
-                    </h5>
+              <div
+                className="confDiv_3"
+                key={id}
+                onClick={() => navigate_4("/Edit_art/" + id)}
+              >
+                <div className="info_3">
+                  <div className="test_3">
+                    <div className="title_3">{cle.title}</div>
+                    <div className="host_3">
+                      <h5>
+                        {cle.conference_id.title} - {cle.start_date}
+                      </h5>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="downfile_3">
-              <img
+                <div className="downfile_3">
+                  <img
                     src={image_down}
                     alt=""
                     onClick={() => saveFile(cle.article_url)}
                     className="down"
                   />
+                </div>
               </div>
-            </div>
-          </>
+            </>
           );
         })}
       </>
@@ -254,152 +248,159 @@ function Account() {
     setToggleState(index);
   };
 
-  
-
   return (
     <div className="account_page" id="account">
       <div className="navv">
         <div className="navbar_11">
-        <ul className="navbar_list_11">
-          <Link to="/" className="link">
-            <div className="list_item_11"><p>Home</p></div>
-          </Link>
+          <ul className="navbar_list_11">
+            <Link to="/" className="link">
+              <div className="list_item_11">
+                <p>Home</p>
+              </div>
+            </Link>
 
-          <div
-            className="list_item_11"
-            onClick={() => {
-              navigate_2("/MainConf");
-            }}
-          >
-            <p>Conferences</p>
-          </div>
-
-          <Link to="/#footer" smooth className="link">
-            <div className="list_item_11"><p>About us</p> </div>
-          </Link>
-          <Link to="/#footer" smooth className="link">
-            <div className="list_item_11"><p>Contact us</p> </div>
-          </Link>
-
-          <div
-            className="list_item_11"
-            onClick={() => {
-              navigate("/account");
-            }}
-          >
-           <p>Account</p> 
-          </div>
-        </ul>
-      </div>
-      </div>
-      
-      <div className="proff">
-      <div className="container_acc">
-        <div className="container_acc_l">
-
-          {/*  ////////////////////////////// */}
-          <div className="container_acc_l_logo">
-            <div className="form-controll">
-              <input type="file" onChange={()=>{setbool(!bool)}} name="file_up" />
+            <div
+              className="list_item_11"
+              onClick={() => {
+                navigate_2("/MainConf");
+              }}
+            >
+              <p>Conferences</p>
             </div>
-            <img
-              ref={hiddenFileInput}
-              src={host + data_profile.profile_picture}
-              alt={host + data_profile.profile_picture}
-            />
 
-{/* <input type="file" onClick={uploadImage} />
+            <Link to="/#footer" smooth className="link">
+              <div className="list_item_11">
+                <p>About us</p>{" "}
+              </div>
+            </Link>
+            <Link to="/#footer" smooth className="link">
+              <div className="list_item_11">
+                <p>Contact us</p>{" "}
+              </div>
+            </Link>
+
+            <div
+              className="list_item_11"
+              onClick={() => {
+                navigate("/account");
+              }}
+            >
+              <p>Account</p>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <div className="proff">
+        <div className="container_acc">
+          <div className="container_acc_l">
+            {/*  ////////////////////////////// */}
+            <div className="container_acc_l_logo">
+              <div className="form-controll">
+                <input
+                  type="file"
+                  onChange={() => {
+                    setbool(!bool);
+                  }}
+                  name="file_up"
+                />
+              </div>
+              <img
+                ref={hiddenFileInput}
+                src={host + data_profile.profile_picture}
+                alt={host + data_profile.profile_picture}
+              />
+
+              {/* <input type="file" onClick={uploadImage} />
 
 
 
             <img src={host+data_profile.profile_picture}/> */}
+            </div>
+
+            {/* //////////////////////////////////////////////////// */}
+
+            <div className="container_acc_l_info">
+              <div className="profile_info_sta">
+                <h1 className="nom">
+                  {data_profile.family_name} {data_profile.first_name}
+                </h1>
+                <h6 className="bioo">{data_profile.bio}</h6>
+              </div>
+              <div className="profile_info_det">
+                <div className="profile_info_det_div">
+                  <LocationOnIcon className="icon"></LocationOnIcon>
+                  <p>{data_profile.full_adress}</p>
+                </div>
+                <div className="profile_info_det_div">
+                  <AlternateEmailIcon className="icon"></AlternateEmailIcon>
+                  <p>{data_profile.email}</p>
+                </div>
+                <div className="profile_info_det_div">
+                  <PhoneIcon className="icon"></PhoneIcon>
+                  <p>{data_profile.phone_number}</p>
+                </div>
+                <div className="profile_info_det_div">
+                  <LinkedInIcon className="icon"></LinkedInIcon>
+                  <p>{data_profile.linked_in_username}</p>
+                </div>
+                <div className="profile_info_det_div">
+                  <LogoutIcon className="icon"></LogoutIcon>
+                  <p>Logout</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* //////////////////////////////////////////////////// */}
-
-          <div className="container_acc_l_info">
-            <div className="profile_info_sta">
-              <h1 className="nom">
-                {data_profile.family_name} {data_profile.first_name}
-              </h1>
-              <h6 className="bioo">{data_profile.bio}</h6>
+          <div className="container_acc_r">
+            <div className="bloc-tabs">
+              <div
+                className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
+                onClick={() => toggleTab(1)}
+              >
+                My Articles
+              </div>
+              <div
+                className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
+                onClick={() => toggleTab(2)}
+              >
+                Conferences
+              </div>
+              <div
+                className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
+                onClick={() => toggleTab(3)}
+              >
+                waiting for review
+              </div>
             </div>
-            <div className="profile_info_det">
-              <div className="profile_info_det_div">
-                <LocationOnIcon className="icon"></LocationOnIcon>
-                <p>{data_profile.full_adress}</p>
+            <div className="content-tabs">
+              <div
+                className={
+                  toggleState === 1 ? "content  active-content" : "content"
+                }
+              >
+                <Getartcl data={article} />
               </div>
-              <div className="profile_info_det_div">
-                <AlternateEmailIcon className="icon"></AlternateEmailIcon>
-                <p>{data_profile.email}</p>
+
+              <div
+                className={
+                  toggleState === 2 ? "content  active-content" : "content"
+                }
+              >
+                <Getconfs data={confs} />
               </div>
-              <div className="profile_info_det_div">
-                <PhoneIcon className="icon"></PhoneIcon>
-                <p>{data_profile.phone_number}</p>
-              </div>
-              <div className="profile_info_det_div">
-                <LinkedInIcon className="icon"></LinkedInIcon>
-                <p>{data_profile.linked_in_username}</p>
-              </div>
-              <div className="profile_info_det_div">
-                <LogoutIcon className="icon"></LogoutIcon>
-                <p>Logout</p>
+
+              <div
+                className={
+                  toggleState === 3 ? "content  active-content" : "content"
+                }
+              >
+                <Getwait data={waiting} />
               </div>
             </div>
           </div>
         </div>
-
-        <div className="container_acc_r">
-          <div className="bloc-tabs">
-            <div
-              className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
-              onClick={() => toggleTab(1)}
-            >
-              My Articles
-            </div>
-            <div
-              className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
-              onClick={() => toggleTab(2)}
-            >
-              Conferences
-            </div>
-            <div
-              className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
-              onClick={() => toggleTab(3)}
-            >
-              waiting for review
-            </div>
-          </div>
-          <div className="content-tabs">
-            <div
-              className={
-                toggleState === 1 ? "content  active-content" : "content"
-              }
-            >
-              <Getartcl data={article} />
-            </div>
-
-            <div
-              className={
-                toggleState === 2 ? "content  active-content" : "content"
-              }
-            >
-              <Getconfs data={confs} />
-            </div>
-
-            <div
-              className={
-                toggleState === 3 ? "content  active-content" : "content"
-              }
-            >
-              <Getwait data={waiting} />
-            </div>
-          </div>
-        </div>
       </div>
-      </div>
-
-     
     </div>
   );
 }
